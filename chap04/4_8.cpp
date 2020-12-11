@@ -1,4 +1,5 @@
 // フィボナッチ数列を求める再帰関数をメモ化
+// 動的計画法を再帰関数を用いて実現したとみなすことができる
 #include <iostream>
 #include <vector>
 using namespace std;
