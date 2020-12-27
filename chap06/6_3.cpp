@@ -1,29 +1,26 @@
 # 年齢当てゲーム
 #include <iostream>
-#include <vector>
 using namespace std;
 
-const int N = 8;
-const vector<int> a = {3, 5, 8, 10, 14, 17, 21, 39};
-
-// 目的の値 key の添字を返す (存在しない場合は -1)
-int binary_search(int key) {
-    int left = 0, right = (int)a.size() - 1; // 配列 a の左端と右端
-    while (right >= left) {
-        int mid = left + (right - left) / 2;
-        if (a[mid] == key) return mid;
-        else if (a[mid] > key) right = mid - 1;
-        else if (a[mid] < key) left = mid + 1;
-    }
-    return -1;
-}
-
 int main() {
-    cout << binary_search(10) << endl; // 3
-    cout << binary_search(3) << endl; // 0
-    cout << binary_search(39) << endl; // 7
+    cout << "Start Game!" << endl;
 
-    cout << binary_search(-100) << endl; // -1
-    cout << binary_search(9) << endl; // -1
-    cout << binary_search(100) << endl; // -1
+    // A さんの数の候補を表す区間を、[left, right) と表す
+    int left = 20, right = 36;
+
+    // A さんの数を 1 つに絞れないうちは繰り返す
+    while (right - left > 1) {
+        int mid = left + (right - left) / 2;
+        // mid 以上かを聞いて、回答を yes/no で受け取る
+        cout << "Is the age less than " << mid << " ? (yes / no)" << endl;
+        string ans;
+        cin >> ans;
+
+        // 回答の応じて、あるうる数の範囲を絞る
+        if (ans == "yes") right = mid;
+        else left = mid;
+    }
+
+    // ズバリ当てる！
+    cout << "The age is " << left << "!" << endl;
 }
